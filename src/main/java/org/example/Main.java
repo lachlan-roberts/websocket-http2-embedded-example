@@ -3,6 +3,7 @@ package org.example;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +35,9 @@ public class Main
         Server server = new Server();
 
         // SSL Context Factory for HTTPS
-        String keystore = Objects.requireNonNull(Main.class.getResource("/keystore.p12")).getFile();
+        URL keystore = Objects.requireNonNull(Main.class.getResource("/keystore.p12"));
         SslContextFactory.Server sslContextFactory = new SslContextFactory.Server();
-        sslContextFactory.setKeyStorePath(keystore);
+        sslContextFactory.setKeyStorePath(Paths.get(keystore.toURI()).toString());
         sslContextFactory.setKeyStorePassword("storepwd");
         sslContextFactory.setTrustAll(true);
         sslContextFactory.setRenegotiationAllowed(false);
@@ -72,7 +73,7 @@ public class Main
             container.addMapping("/", (req, resp) -> new ProtocolEchoSocket())));
 
         server.start();
-        System.err.println("https://localhost:8443/");
+        System.err.println("https://demo:8443/");
         server.join();
     }
 
