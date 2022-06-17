@@ -73,7 +73,7 @@ public class Main
             container.addMapping("/", (req, resp) -> new ProtocolEchoSocket())));
 
         server.start();
-        System.err.println("https://demo:8443/");
+        System.err.println("https://localhost:8443/");
         server.join();
     }
 
