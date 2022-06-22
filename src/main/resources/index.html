@@ -96,6 +96,7 @@
             }
 
         };
+
     </script>
 
     <style type='text/css'>
@@ -165,6 +166,7 @@
 </div>
 
 <script type='text/javascript'>
+    $('location').value = 'wss://' + window.location.hostname + ':8443';
     $('location').setAttribute('autocomplete', 'OFF');
     $('connectB').onclick = function (event) {
         var location = $('location').value;
